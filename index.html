@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HOTEL REGISTRATION FORM</title>
+    <link rel="shortcut icon" href="/public/images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="/node_modules/bootstrap-icons/font/bootstrap-icons.css">
+    <script>
+        function registerClick(){
+            document.getElementById("lblName").innerHTML = document.getElementById("txtName").value;
+            document.getElementById("lblDate").innerHTML = document.getElementById("txtDate").value;
+            document.getElementById("lblDays").innerHTML = document.getElementById("txtDays").value;
+            document.getElementById("lblPerson").innerHTML = document.getElementById("txtPerson").value;
+
+              var roomName = "";
+              var roomCost = 0;
+
+              var amenitiesName = "";
+              var amenitiesCost =0;
+
+              var total =0;
+              var balance=0;
+
+              var optSuite = document.getElementById("optSuite");
+              var optDeluxe = document.getElementById("optDeluxe");
+
+              if(optSuite.checked){
+                roomName = optSuite.value;
+                roomCost = 4000;
+              }
+              if(optDeluxe.checked){
+                roomName = optDeluxe.value;
+                roomCost = 2500;
+              }
+              var optAc = document.getElementById("optAc");
+              var optLocker = document.getElementById("optLocker");
+
+              if(optAc.checked){
+                amenitiesName += optAc.value + "<br>";
+                amenitiesCost = 1000;
+                roomCost +=amenitiesCost;
+              }
+              if(optLocker.checked){
+                amenitiesName +=optLocker.value + "<br>";
+                amenitiesCost = 300;
+                roomCost += amenitiesCost;
+              }
+              var days = document.getElementById("txtDays").value;
+              total = roomCost*days;
+
+              var advance = document.getElementById("optAdvance").value;
+              balance = total-advance;
+
+             
+
+
+              document.getElementById("lblRoom").innerHTML = roomName;
+              document.getElementById("lblAmenities").innerHTML = amenitiesName;
+              document.getElementById("lblAdvance").innerHTML = advance;
+              document.getElementById("lblBalance").innerHTML = balance;
+              
+        }
+    </script>
+</head>
+<body class="container-fluid">
+    <h2 style="text-align: center;padding: 20px;border: 2px solid black; margin-top: 10px;">Hotel Registration Form</h2>
+    <div class="accordion" id="hotelform">
+        <div class="accordion-item">
+            <div class="accordion-header">
+                  <button class="btn btn-dark w-100 p-2" data-bs-target="#customer" data-bs-toggle="collapse">Customer Information</button>
+            </div>
+            <div class="accordion-collapse collapse show" id="customer" data-bs-parent="#hotelform">
+                <div class="accordion-body">
+                    <dl class="row">
+                        <dd class="col-4">Customer Name</dd>
+                        <dt class="col-8"><input type="text" id="txtName" class="form-control"></dt>
+                        <dd class="col-4">Check In Date</dd>
+                        <dt class="col-8"><input type="date" id="txtDate" class="form-control"></dt>
+                        <dd class="col-4">Total No of Days</dd>
+                        <dt class="col-8"><input type="number" id="txtDays" class="form-control"></dt>
+                        <dd class="col-4">Total No of Persons</dd>
+                        <dt class="col-8"><input type="number" id="txtPerson" class="form-control"></dt>
+                    </dl>
+                </div>                
+            </div>
+        </div>       
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <button class="btn btn-dark w-100 p-2" data-bs-target="#room" data-bs-toggle="collapse">Select Room Type</button>
+            </div>
+            <div class="accordion-collapse collapse" id="room" data-bs-parent="#hotelform">
+                <div class="accordion-body">
+                    <div class="row">
+                        <div class="col">
+                              <div class="card">
+                                <img src="public/images/deluxe.jpg" class="card-img-top" height="180">
+                                <div class="card-header">
+                                <h3> <input type="radio" id="optDeluxe" class="form-check-input" name="room" value="Deluxe Room"> Deluxe Room - 2500</h3>
+    
+                                </div>
+                              </div>
+                        </div>
+                        <div class="col">
+                            <div class="card">
+                                <img src="public/images/suitroom.jpg" class="card-img-top" height="180">
+                                <div class="card-header">
+                                <h3> <input type="radio" id="optSuite" class="form-check-input" name="room" value="Suite Room"> Suite Room - 4000</h3>
+                                </div>
+                              </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <button class="btn btn-dark w-100 p-2" data-bs-target="#amenities" data-bs-toggle="collapse">Select Amenities</button>
+            </div>
+            <div class="accordion-collapse collapse" id="amenities" data-bs-parent="#hotelform">
+                <div class="accordion-body">
+                    <div class="row">
+                        <div class="col">
+                              <div class="card">
+                                <img src="public/images/acroom.jpeg" class="card-img-top" height="180">
+                                <div class="card-header">
+                                <h3> <input type="checkbox" id="optAc" class="form-check-input" value="A/c"> A/C - 1000</h3>
+    
+                                </div>
+                              </div>
+                        </div>
+                        <div class="col">
+                            <div class="card">
+                                <img src="public/images/locker.jpg" class="card-img-top" height="180">
+                                <div class="card-header">
+                                <h3> <input type="checkbox" id="optLocker" class="form-check-input" value="Locker"> Locker - 300</h3>
+                                </div>
+                              </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <button class="btn btn-dark w-100 p-2" data-bs-target="#advance" data-bs-toggle="collapse">Advance Amount</button>
+            </div>
+            <div class="accordion-collapse collapse" align="center" id="advance" data-bs-parent="#hotelform">
+                 <div class="accordion-body w-25">
+                    <dl class="row>
+                        <dd class="col">Advance Amount</dd>
+                        <dt class="col"><input type="text" id="optAdvance" class="form-control"></dt>
+                     </dl>
+                 </div>
+            </div>
+        </div>
+    </div>
+    <div align="center">
+        <button class="btn btn-primary w-50" data-bs-target="#summary" data-bs-toggle="modal" onclick="registerClick()">Register</button>
+    </div>
+    <div class="modal fade" id="summary">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                 <div class="modal-header">
+                     <h2>Booking Details</h2>
+                     <button class="btn-close" data-bs-dismiss="modal"></button>
+                 </div>
+                 <div class="modal-body">
+                    <dl>
+                        <dt>Customer Name</dt>
+                        <dd id="lblName"></dd>
+                        <dt>Check In Date</dt>
+                        <dd id="lblDate"></dd>
+                        <dt>Total No of Days</dt>
+                        <dd id="lblDays"></dd>
+                        <dt>Total No of Person</dt>
+                        <dd id="lblPerson"></dd>
+                        <dt>Room Type</dt>
+                        <dd id="lblRoom"></dd>
+                        <dt>Amenities</dt>
+                        <dd id="lblAmenities"></dd>
+                        <dt>Advance Amount</dt>
+                        <dd id="lblAdvance"></dd>
+                        <dt>Balance Amount</dt>
+                        <dd id="lblBalance"></dd>
+                     </dl>
+                 </div>
+            </div>
+        </div>
+    </div>    
+    <script src="/node_modules/jquery/dist/jquery.js"></script>
+    <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+</body>
+</html>
